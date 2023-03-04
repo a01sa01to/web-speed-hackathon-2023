@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
@@ -15,20 +16,21 @@ import { useProduct } from '../../hooks/useProduct';
 import { useReviews } from '../../hooks/useReviews';
 import { useSendReview } from '../../hooks/useSendReview';
 import { useUpdateCartItem } from '../../hooks/useUpdateCartItems';
-import { useOpenModal } from '../../store/modal';
+import { modalContext } from '../../store/modal';
 import { normalizeCartItemCount } from '../../utils/normalize_cart_item';
 
 import * as styles from './ProductDetail.styles';
 
 export const ProductDetail: FC = () => {
   const { productId } = useParams();
+  const ctx = useContext(modalContext);
 
   const { product } = useProduct(Number(productId));
   const { reviews } = useReviews(product?.id);
   const { isAuthUser } = useAuthUser();
   const { sendReview } = useSendReview();
   const { updateCartItem } = useUpdateCartItem();
-  const handleOpenModal = useOpenModal();
+  const handleOpenModal = () => ctx.setModalState('SIGN_IN');
   const { amountInCart } = useAmountInCart(Number(productId));
   const { activeOffer } = useActiveOffer(product);
 
@@ -66,7 +68,7 @@ export const ProductDetail: FC = () => {
                 <ProductPurchaseSection
                   amountInCart={amountInCart}
                   isAuthUser={isAuthUser}
-                  onOpenSignInModal={() => handleOpenModal('SIGN_IN')}
+                  onOpenSignInModal={handleOpenModal}
                   onUpdateCartItem={handleUpdateItem}
                   product={product}
                 />

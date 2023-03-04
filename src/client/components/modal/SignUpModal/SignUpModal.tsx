@@ -1,11 +1,11 @@
 import type { FormikErrors } from 'formik';
 import { useFormik } from 'formik';
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as z from 'zod';
 
 import { useSignUp } from '../../../hooks/useSignUp';
-import { useCloseModal, useIsOpenModal, useOpenModal } from '../../../store/modal';
+import { modalContext } from '../../../store/modal';
 import { Modal } from '../../foundation/Modal';
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
@@ -27,11 +27,13 @@ export type SignUpForm = {
 };
 
 export const SignUpModal: FC = () => {
-  const isOpened = useIsOpenModal('SIGN_UP');
+  const ctx = useContext(modalContext);
+
+  const isOpened = ctx.key === 'SIGN_UP';
   const { signUp } = useSignUp();
 
-  const handleOpenModal = useOpenModal();
-  const handleCloseModal = useCloseModal();
+  const handleOpenModal = () => ctx.setModalState('SIGN_IN');
+  const handleCloseModal = () => ctx.setModalState(undefined);
 
   const [submitError, setSubmitError] = useState<Error | null>(null);
   const formik = useFormik<SignUpForm>({
@@ -77,7 +79,7 @@ export const SignUpModal: FC = () => {
           <button
             className={styles.switchToSignInButton()}
             data-testid="modal-switch-to-signin"
-            onClick={() => handleOpenModal('SIGN_IN')}
+            onClick={handleOpenModal}
           >
             ログイン
           </button>

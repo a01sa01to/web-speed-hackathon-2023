@@ -1,26 +1,28 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { createContext, useCallback, useState } from 'react';
 
-import type { ModalKey } from './state';
-import { modalState } from './state';
+export type ModalKey = 'SIGN_UP' | 'SIGN_IN';
 
-export const useIsOpenModal = (key: ModalKey) => {
-  const modalKey = useRecoilValue(modalState);
-
-  return modalKey === key;
+type ModalState = {
+  key: ModalKey | undefined;
+  setModalState: (modalKey: ModalKey | undefined) => void;
 };
 
-export const useOpenModal = () => {
-  const setModal = useSetRecoilState(modalState);
-
-  return (key: ModalKey) => {
-    setModal(key);
-  };
+const defaultContext: ModalState = {
+  key: undefined,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setModalState: () => {},
 };
 
-export const useCloseModal = () => {
-  const setModal = useSetRecoilState(modalState);
+export const modalContext = createContext<ModalState>(defaultContext);
 
-  return () => {
-    setModal(undefined);
+// custom Hook
+export const useModal = (): ModalState => {
+  const [key, setModal] = useState<ModalKey | undefined>(undefined);
+  const setModalState = useCallback((current: ModalKey | undefined): void => {
+    setModal(current);
+  }, []);
+  return {
+    key,
+    setModalState,
   };
 };
