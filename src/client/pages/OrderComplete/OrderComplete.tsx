@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,23 +11,15 @@ import { WidthRestriction } from '../../components/foundation/WidthRestriction';
 import { ProductHeroImage } from '../../components/product/ProductHeroImage';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useRecommendation } from '../../hooks/useRecommendation';
-import { loadFonts } from '../../utils/load_fonts';
 
 import * as styles from './OrderComplete.styles';
 
 export const OrderComplete: FC = () => {
   const navigate = useNavigate();
-  const [isReadyFont, setIsReadyFont] = useState(false);
   const { authUserLoading, isAuthUser } = useAuthUser();
   const { recommendation } = useRecommendation();
 
-  useEffect(() => {
-    loadFonts().then(() => {
-      setIsReadyFont(true);
-    });
-  }, []);
-
-  if (!recommendation || !isReadyFont || authUserLoading) {
+  if (!recommendation || authUserLoading) {
     return null;
   }
   if (!isAuthUser) {
@@ -38,6 +29,14 @@ export const OrderComplete: FC = () => {
 
   return (
     <>
+      <link href="https://fonts.googleapis.com" rel="preconnect" />
+      <link crossOrigin="crossorigin" href="https://fonts.gstatic.com" rel="preconnect" />
+      <link
+        href={`https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&display=swap&text=${encodeURIComponent(
+          'このサイトは架空のサイトであり、商品が発送されることはありません',
+        )}`}
+        rel="stylesheet"
+      />
       <Helmet>
         <title>購入が完了しました</title>
       </Helmet>
