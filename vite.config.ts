@@ -28,6 +28,18 @@ export default defineConfig(async ({ mode }) => {
       cssCodeSplit: true,
       minify: true,
       rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('react')) return 'react';
+            if (id.includes('apollo')) return 'apollo';
+            if (id.includes('polyfill')) return 'polyfill';
+            if (id.includes('recoil')) return 'recoil';
+            if (id.includes('graphql')) return 'graphql';
+            if (id.includes('canvaskit')) return 'canvaskit';
+            if (id.includes('node_modules')) return 'vendor';
+            return 'index';
+          },
+        },
         plugins: [
           mode === 'analyze'
             ? analyzer({
