@@ -8,7 +8,6 @@ import { Icon } from '../../../foundation/Icon';
 import { Image } from '../../../foundation/Image';
 
 import * as styles from './MediaItem.styles';
-import { loadThumbnail } from './loadThumbnail';
 
 type Props = {
   file: MediaFileFragmentResponse;
@@ -20,9 +19,10 @@ export const MediaItem: FC<Props> = ({ file }) => {
 
   useEffect(() => {
     if (mediaType === 'image') {
-      return setImageSrc(file.filename);
+      return setImageSrc(file.filename.replace(/\.jpg$/, '_thumb.jpg'));
+    } else {
+      return setImageSrc(file.filename.replace(/\.mp4$/, '_thumb.png'));
     }
-    loadThumbnail(file.filename).then((url) => setImageSrc(url));
   }, [file.filename, mediaType]);
 
   if (imageSrc === undefined) {
