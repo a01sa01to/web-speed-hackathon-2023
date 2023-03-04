@@ -1,3 +1,6 @@
+# fly.toml file generated for restless-field-6702 on 2023-03-04T10:32:44+09:00
+
+app = "restless-field-6702"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
