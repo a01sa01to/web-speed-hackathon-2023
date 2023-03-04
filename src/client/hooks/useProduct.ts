@@ -12,6 +12,7 @@ export const useProduct = (productId: number) => {
       productId,
     },
   });
+  if (productResult.loading) return { loading: true, product: undefined };
 
   const product = productResult.data?.product;
 

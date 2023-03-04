@@ -10,12 +10,8 @@ import { useRecommendation } from '../../hooks/useRecommendation';
 import * as styles from './Top.styles';
 
 export const Top: FC = () => {
-  const { recommendation } = useRecommendation();
-  const { features } = useFeatures();
-
-  if (recommendation === undefined || features === undefined) {
-    return null;
-  }
+  const { loading: loadingRecommendation, recommendation } = useRecommendation();
+  const { features, loading: loadingFeatures } = useFeatures();
 
   return (
     <>
@@ -24,17 +20,26 @@ export const Top: FC = () => {
       </Helmet>
       <Layout>
         <div>
-          <ProductHeroImage product={recommendation.product} title="今週のオススメ" />
+          {loadingRecommendation ? (
+            <div>loading...</div>
+          ) : (
+            recommendation && <ProductHeroImage product={recommendation.product} title="今週のオススメ" />
+          )}
 
           <div className={styles.featureList()}>
-            {features.map((featureSection) => {
-              return (
-                <div key={featureSection.id} className={styles.feature()}>
-                  <h2 className={styles.featureHeading()}>{featureSection.title}</h2>
-                  <ProductList featureSection={featureSection} />
-                </div>
-              );
-            })}
+            {loadingFeatures ? (
+              <div>loading...</div>
+            ) : (
+              features &&
+              features.map((featureSection) => {
+                return (
+                  <div key={featureSection.id} className={styles.feature()}>
+                    <h2 className={styles.featureHeading()}>{featureSection.title}</h2>
+                    <ProductList featureSection={featureSection} />
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </Layout>
