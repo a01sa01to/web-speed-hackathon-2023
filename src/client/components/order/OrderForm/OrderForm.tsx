@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import type { ChangeEventHandler, FC } from 'react';
-import zipcodeJa from 'zipcode-ja';
 
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
@@ -33,13 +32,20 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
     formik.handleChange(event);
 
     const zipCode = event.target.value;
-    // TODO: replace later
-    const address = [...(JSON.parse(JSON.stringify(zipcodeJa))[zipCode]?.address ?? [])];
-    const prefecture = address.shift();
-    const city = address.join(' ');
+    fetch(`/api/zipcode?zipcode=${zipCode}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .catch(() => [])
+      .then((address: string[]) => {
+        const prefecture = address.shift();
+        const city = address.join(' ');
 
-    formik.setFieldValue('prefecture', prefecture);
-    formik.setFieldValue('city', city);
+        formik.setFieldValue('prefecture', prefecture);
+        formik.setFieldValue('city', city);
+      });
   };
 
   return (

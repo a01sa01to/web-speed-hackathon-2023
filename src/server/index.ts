@@ -9,6 +9,7 @@ import route from 'koa-route';
 import send from 'koa-send';
 import session from 'koa-session';
 import serve from 'koa-static';
+import zipcodeJa from 'zipcode-ja';
 
 import type { Context } from './context';
 import { dataSource } from './data_source';
@@ -53,6 +54,15 @@ async function init(): Promise<void> {
     route.post('/initialize', async (ctx) => {
       await initializeDatabase();
       ctx.status = 204;
+    }),
+  );
+
+  app.use(
+    route.get('/api/zipcode', async (ctx) => {
+      const zipcode = ctx.query.zipcode as string;
+      const result = await (zipcodeJa[zipcode] ?? { address: [] }).address;
+      ctx.body = JSON.stringify(result);
+      ctx.status = 200;
     }),
   );
 
