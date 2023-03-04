@@ -6,7 +6,6 @@ specifiers:
   '@as-integrations/koa': 0.2.1
   '@babel/core': 7.20.5
   '@emotion/css': 11.10.5
-  '@js-temporal/polyfill': 0.4.3
   '@koa/router': 12.0.0
   '@types/bcrypt': 5.0.0
   '@types/currency-formatter': 1.5.1
@@ -30,6 +29,7 @@ specifiers:
   cross-env: 7.0.3
   csstype: 3.1.1
   currency-formatter: 1.5.9
+  dayjs: 1.11.7
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0
   eslint-import-resolver-typescript: 3.5.3
@@ -87,12 +87,12 @@ dependencies:
   '@apollo/server': 4.3.0_graphql@16.6.0
   '@as-integrations/koa': 0.2.1_g7mswurbupr7ivx7jgbyjqm5pu
   '@emotion/css': 11.10.5_@babel+core@7.20.5
-  '@js-temporal/polyfill': 0.4.3
   '@koa/router': 12.0.0
   '@types/koa-session': 5.10.6
   bcrypt: 5.1.0
   classnames: 2.3.2
   currency-formatter: 1.5.9
+  dayjs: 1.11.7
   formik: 2.2.9_react@18.2.0
   graphql: 16.6.0
   http-graceful-shutdown: 3.1.13
@@ -1232,14 +1232,6 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
-
-  /@js-temporal/polyfill/0.4.3:
-    resolution: {integrity: sha512-6Fmjo/HlkyVCmJzAPnvtEWlcbQUSRhi8qlN9EtJA/wP7FqXsevLLrlojR44kzNzrRkpf7eDJ+z7b4xQD/Ycypw==}
-    engines: {node: '>=12'}
-    dependencies:
-      jsbi: 4.3.0
-      tslib: 2.5.0
-    dev: false
 
   /@koa/router/12.0.0:
     resolution: {integrity: sha512-cnnxeKHXlt7XARJptflGURdJaO+ITpNkOHmQu7NHmCoRinPbyvFzce/EG/E8Zy81yQ1W9MoSdtklc3nyaDReUw==}
@@ -2620,6 +2612,10 @@ packages:
   /date-fns/2.29.3:
     resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
     engines: {node: '>=0.11'}
+    dev: false
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /debug/2.6.9:
@@ -4270,10 +4266,6 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
-
-  /jsbi/4.3.0:
-    resolution: {integrity: sha512-SnZNcinB4RIcnEyZqFPdGPVgrg2AcnykiBy0sHVJQKHYeaLUvi3Exj+iaPpLnFVkDPZIV4U0yvgC9/R4uEAZ9g==}
-    dev: false
 
   /jsesc/2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}

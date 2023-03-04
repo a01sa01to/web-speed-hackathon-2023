@@ -1,5 +1,6 @@
-import { Temporal } from '@js-temporal/polyfill';
-import * as bcrypt from 'bcrypt';
+import { compare, hash } from 'bcrypt';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import type { GraphQLFieldResolver } from 'graphql';
 
 import { Order } from '../../model/order';
@@ -9,6 +10,8 @@ import { ShoppingCartItem } from '../../model/shopping_cart_item';
 import { User } from '../../model/user';
 import type { Context } from '../context';
 import { dataSource } from '../data_source';
+
+dayjs.extend(utc);
 
 type MutationResolver = {
   signin: GraphQLFieldResolver<unknown, Context, { email: string; password: string }, Promise<boolean>>;
@@ -56,7 +59,7 @@ export const mutationResolver: MutationResolver = {
       throw new Error('Authentication required.');
     }
 
-    const postedAt = Temporal.Now.instant().toString({ timeZone: Temporal.TimeZone.from('UTC') });
+    const postedAt = dayjs().utc(true).format();
 
     await dataSource.manager.save(
       dataSource.manager.create(Review, {
@@ -80,7 +83,7 @@ export const mutationResolver: MutationResolver = {
       },
     });
 
-    if ((await bcrypt.compare(args.password, user.password)) !== true) {
+    if ((await compare(args.password, user.password)) !== true) {
       throw new Error('Auth error.');
     }
 
@@ -91,7 +94,7 @@ export const mutationResolver: MutationResolver = {
     const user = await dataSource.manager.save(
       dataSource.manager.create(User, {
         email: args.email,
-        password: await bcrypt.hash(args.password, 10),
+        password: await hash(args.password, 10),
       }),
     );
     await dataSource.manager.save(

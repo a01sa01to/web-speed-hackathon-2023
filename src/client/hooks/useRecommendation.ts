@@ -7,7 +7,7 @@ export const useRecommendation = () => {
   const recommendationsResult = useQuery<GetRecommendationsQueryResponse>(GetRecommendationsQuery);
   if (recommendationsResult.loading) return { loading: true, recommendation: undefined };
 
-  const hour = window.Temporal.Now.plainTimeISO().hour;
+  const hour = new Date().getUTCHours();
   const recommendations = recommendationsResult?.data?.recommendations;
 
   if (recommendations == null) return { recommendation: undefined };

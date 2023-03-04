@@ -1,14 +1,16 @@
+import dayjs from 'dayjs';
+
 import type { LimitedTimeOfferFragmentResponse } from '../graphql/fragments';
 
 export function getActiveOffer(
   offers: LimitedTimeOfferFragmentResponse[],
 ): LimitedTimeOfferFragmentResponse | undefined {
   const activeOffer = offers.find((offer) => {
-    const now = window.Temporal.Now.instant();
-    const startDate = window.Temporal.Instant.from(offer.startDate);
-    const endDate = window.Temporal.Instant.from(offer.endDate);
+    const now = dayjs();
+    const startDate = dayjs(offer.startDate);
+    const endDate = dayjs(offer.endDate);
 
-    return window.Temporal.Instant.compare(startDate, now) < 0 && window.Temporal.Instant.compare(now, endDate) < 0;
+    return startDate.valueOf() < now.valueOf() && now.valueOf() < endDate.valueOf();
   });
 
   return activeOffer;
