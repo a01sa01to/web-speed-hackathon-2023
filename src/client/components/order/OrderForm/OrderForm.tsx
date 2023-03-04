@@ -38,7 +38,6 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
       },
     })
       .then((res) => res.json())
-      .catch(() => [])
       .then((address: string[]) => {
         const prefecture = address.shift();
         const city = address.join(' ');
