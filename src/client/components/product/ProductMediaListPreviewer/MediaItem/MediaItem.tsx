@@ -31,7 +31,7 @@ export const MediaItem: FC<Props> = ({ file }) => {
 
   return (
     <div className={styles.container()}>
-      <Image fill src={imageSrc} />
+      <Image fill src={imageSrc.replace(/(png|jpg)/, 'webp')} />
       {mediaType === 'video' && (
         <div className={styles.playIcon()}>
           <Icon IconType={FaPlay} color="#ffffff" height={16} width={16} />
