@@ -1,10 +1,10 @@
 import * as currencyFormatter from 'currency-formatter';
-import _ from 'lodash';
 import type { FC } from 'react';
 import { memo } from 'react';
 
 import type { OrderFragmentResponse } from '../../../graphql/fragments';
 import { useTotalPrice } from '../../../hooks/useTotalPrice';
+import isEqual from '../../../utils/is_equal';
 import { CartItem } from '../CartItem';
 
 import * as styles from './OrderPreview.styles';
@@ -32,6 +32,6 @@ export const OrderPreview: FC<Props> = memo(({ onRemoveCartItem, onUpdateCartIte
       <p className={styles.totalPrice()}>{currencyFormatter.format(totalPrice, { code: 'JPY', precision: 0 })}</p>
     </div>
   );
-}, _.isEqual);
+}, isEqual);
 
 OrderPreview.displayName = 'OrderPreview';
