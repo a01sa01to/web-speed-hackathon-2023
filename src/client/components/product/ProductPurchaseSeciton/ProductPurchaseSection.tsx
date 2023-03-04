@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import type { FC } from 'react';
 import { memo } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
 
 import type { ProductFragmentResponse } from '../../../graphql/fragments';
 import { Icon } from '../../foundation/Icon';
@@ -51,7 +52,7 @@ export const ProductPurchaseSection: FC<Props> = memo(
       <div className={styles.container()}>
         <p className={styles.amount()}>
           <span className={styles.checkIcon()}>
-            <Icon color="#3BA175" height={18} type="FaCheckCircle" width={18} />
+            <Icon IconType={FaCheckCircle} color="#3BA175" height={18} width={18} />
           </span>
           <span>{amountInCart}個 カートに追加済み</span>
         </p>
