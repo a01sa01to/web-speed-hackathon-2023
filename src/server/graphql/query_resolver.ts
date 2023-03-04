@@ -13,9 +13,15 @@ type QueryResolver = {
   product: GraphQLFieldResolver<unknown, Context, { id: number }, Promise<Product>>;
   recommendations: GraphQLFieldResolver<unknown, Context, never, Promise<Recommendation[]>>;
   user: GraphQLFieldResolver<unknown, Context, { id: number }, Promise<User>>;
+  feature: GraphQLFieldResolver<unknown, Context, { id: number }, Promise<FeatureSection>>;
 };
 
 export const queryResolver: QueryResolver = {
+  feature: async (_parent, _args) => {
+    return dataSource.manager.findOneOrFail(FeatureSection, {
+      where: { id: _args.id },
+    });
+  },
   features: () => {
     return dataSource.manager.find(FeatureSection);
   },

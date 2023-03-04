@@ -1,12 +1,13 @@
-import { useQuery } from '@apollo/client';
-
-import type { GetFeatureSectionsQueryResponse } from '../graphql/queries';
-import { GetFeatureSectionsQuery } from '../graphql/queries';
+import { gql, useQuery } from '@apollo/client';
 
 export const useFeatures = () => {
-  const featuresResult = useQuery<GetFeatureSectionsQueryResponse>(GetFeatureSectionsQuery);
-  if (featuresResult.loading) return { features: undefined, loading: true };
-
-  const features = featuresResult.data?.features;
-  return { features };
+  const featuresResult = useQuery<{ features: { id: number }[] }>(gql`
+    query {
+      features {
+        id
+      }
+    }
+  `);
+  if (featuresResult.loading) return { features: [], loading:true };
+  else return { features: featuresResult.data?.features.map((f) => [true, { id: f.id }]) ?? [], loading:false };
 };

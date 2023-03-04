@@ -4,4 +4,5 @@ type Query {
   features: [FeatureSection!]!
   user(id: Int!): User!
   me: User
+  feature(id: Int!): FeatureSection!
 }
