@@ -42,9 +42,7 @@ export const ProductDetail: FC = () => {
   };
 
   const handleUpdateItem = (productId: number, amount: number) => {
-    updateCartItem({
-      variables: { amount: normalizeCartItemCount(amount), productId },
-    });
+    updateCartItem({ amount: normalizeCartItemCount(amount), productId });
   };
 
   return (
