@@ -4,7 +4,6 @@ import { koaMiddleware } from '@as-integrations/koa';
 import gracefulShutdown from 'http-graceful-shutdown';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import logger from 'koa-logger';
 import route from 'koa-route';
 import send from 'koa-send';
 import session from 'koa-session';
@@ -26,7 +25,6 @@ async function init(): Promise<void> {
   const httpServer = http.createServer(app.callback());
 
   app.keys = ['cookie-key'];
-  app.use(logger());
   app.use(bodyParser());
   app.use(session({}, app));
 
