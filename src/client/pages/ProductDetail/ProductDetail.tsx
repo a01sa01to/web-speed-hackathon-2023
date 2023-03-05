@@ -27,7 +27,7 @@ export const ProductDetail: FC = () => {
 
   const { product } = useProduct(Number(productId));
   const { reviews } = useReviews(product?.id);
-  const { isAuthUser } = useAuthUser();
+  const { isAuthUser, reloadQuery: reloadUser } = useAuthUser();
   const { sendReview } = useSendReview();
   const { updateCartItem } = useUpdateCartItem();
   const handleOpenModal = () => ctx.setModalState('SIGN_IN');
@@ -36,11 +36,9 @@ export const ProductDetail: FC = () => {
 
   const handleSubmitReview = ({ comment }: { comment: string }) => {
     sendReview({
-      variables: {
-        comment,
-        productId: Number(productId),
-      },
-    });
+      comment,
+      productId: Number(productId),
+    }).then(() => reloadUser({ requestPolicy: 'network-only' }));
   };
 
   const handleUpdateItem = (productId: number, amount: number) => {

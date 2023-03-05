@@ -1,6 +1,6 @@
-import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { useQuery } from 'urql';
 
 import type { GetProductReviewsQueryResponse } from '../graphql/queries';
 import { GetProductReviewsQuery } from '../graphql/queries';
@@ -8,12 +8,13 @@ import { GetProductReviewsQuery } from '../graphql/queries';
 export const useReviews = (productId: number | undefined) => {
   const handleError = useErrorHandler();
 
-  const [loadReviews, reviewsResult] = useLazyQuery<GetProductReviewsQueryResponse>(GetProductReviewsQuery, {
-    onError: handleError,
+  const [reviewsResult, loadReviews] = useQuery<GetProductReviewsQueryResponse>({
+    query: GetProductReviewsQuery,
     variables: {
       productId,
     },
   });
+  if (reviewsResult.error) handleError(reviewsResult.error);
 
   useEffect(() => {
     // サーバー負荷が懸念されそうなので、リクエストを少し待つ

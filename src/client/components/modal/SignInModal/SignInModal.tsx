@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import type { FC } from 'react';
 import { useContext, useState } from 'react';
 
+import { useAuthUser } from '../../../hooks/useAuthUser';
 import { useSignIn } from '../../../hooks/useSignIn';
 import { modalContext } from '../../../store/modal';
 import { Modal } from '../../foundation/Modal';
@@ -23,6 +24,7 @@ export const SignInModal: FC = () => {
   const ctx = useContext(modalContext);
 
   const isOpened = ctx.key === 'SIGN_IN';
+  const { reloadQuery: reloadUser } = useAuthUser();
   const { signIn } = useSignIn();
 
   const handleOpenModal = () => ctx.setModalState('SIGN_UP');
@@ -37,11 +39,9 @@ export const SignInModal: FC = () => {
     async onSubmit(values, { resetForm }) {
       try {
         await signIn({
-          variables: {
-            email: values.email,
-            password: values.password,
-          },
-        });
+          email: values.email,
+          password: values.password,
+        }).then(() => reloadUser({ requestPolicy: 'network-only' }));
         resetForm();
         setSubmitError(null);
         handleCloseModal();

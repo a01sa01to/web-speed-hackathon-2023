@@ -1,15 +1,17 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from 'urql';
 
 export const useFeatures = () => {
-  const featuresResult = useQuery<{ features: { id: number; title: string }[] }>(gql`
+  const [featuresResult] = useQuery<{ features: { id: number; title: string }[] }>({
+    query: `
     query {
       features {
         id
         title
       }
     }
-  `);
-  if (featuresResult.loading) return { features: [], loading: true };
+  `,
+  });
+  if (featuresResult.fetching) return { features: [], loading: true };
   else
     return {
       features: featuresResult.data?.features.map((f) => [true, { id: f.id, title: f.title }]) ?? [],

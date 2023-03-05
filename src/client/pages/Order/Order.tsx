@@ -16,7 +16,7 @@ import styles from './Order.module.css';
 export const Order: FC = () => {
   const navigate = useNavigate();
 
-  const { authUser, authUserLoading, isAuthUser } = useAuthUser();
+  const { authUser, authUserLoading, isAuthUser, reloadQuery: reloadUser } = useAuthUser();
   const { updateCartItem } = useUpdateCartItem();
   const { submitOrder } = useSubmitOrder();
   const { order } = useOrder();
@@ -45,19 +45,15 @@ export const Order: FC = () => {
           <OrderPreview
             onRemoveCartItem={(productId) => {
               updateCartItem({
-                variables: {
-                  amount: 0,
-                  productId,
-                },
-              });
+                amount: 0,
+                productId,
+              }).then(() => reloadUser({ requestPolicy: 'network-only' }));
             }}
             onUpdateCartItem={(productId, amount) => {
               updateCartItem({
-                variables: {
-                  amount,
-                  productId,
-                },
-              });
+                amount,
+                productId,
+              }).then(() => reloadUser({ requestPolicy: 'network-only' }));
             }}
             order={order}
           />
@@ -68,11 +64,10 @@ export const Order: FC = () => {
           <OrderForm
             onSubmit={(values) => {
               submitOrder({
-                variables: {
-                  address: `${values.prefecture}${values.city}${values.streetAddress}`,
-                  zipCode: values.zipCode,
-                },
+                address: `${values.prefecture}${values.city}${values.streetAddress}`,
+                zipCode: values.zipCode,
               }).then(() => {
+                reloadUser({ requestPolicy: 'network-only' });
                 navigate('/order/complete');
               });
             }}
