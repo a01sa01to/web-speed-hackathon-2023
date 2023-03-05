@@ -19,6 +19,7 @@ specifiers:
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
   '@types/react-helmet': 6.1.6
+  '@types/react-lazy-load-image-component': 1.5.2
   '@types/throttle-debounce': 5.0.0
   '@typescript-eslint/eslint-plugin': 5.45.0
   '@typescript-eslint/parser': 5.45.0
@@ -60,6 +61,7 @@ specifiers:
   react-helmet: 6.1.0
   react-icons: 4.7.1
   react-is: 18.2.0
+  react-lazy-load-image-component: 1.5.6
   react-overlays: 5.2.1
   react-router-dom: 6.4.5
   reflect-metadata: 0.1.13
@@ -105,6 +107,7 @@ dependencies:
   react-helmet: 6.1.0_react@18.2.0
   react-icons: 4.7.1_react@18.2.0
   react-is: 18.2.0
+  react-lazy-load-image-component: 1.5.6_biqbaboplfbrettd7655fr4n2y
   react-overlays: 5.2.1_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.4.5_biqbaboplfbrettd7655fr4n2y
   reflect-metadata: 0.1.13
@@ -128,6 +131,7 @@ devDependencies:
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
   '@types/react-helmet': 6.1.6
+  '@types/react-lazy-load-image-component': 1.5.2
   '@types/throttle-debounce': 5.0.0
   '@typescript-eslint/eslint-plugin': 5.45.0_yjegg5cyoezm3fzsmuszzhetym
   '@typescript-eslint/parser': 5.45.0_s5ps7njkmjlaqajutnox5ntcla
@@ -1591,13 +1595,19 @@ packages:
       '@types/react': 18.0.26
     dev: true
 
+  /@types/react-lazy-load-image-component/1.5.2:
+    resolution: {integrity: sha512-4NLJsMJVrMv18FuMIkUUBVj/PH9A+BvLKrZC75EWiEFn1IsMrZHgL1tVKw5QBfoa0Qjz6SkWIzEvwcyZ8PgnIg==}
+    dependencies:
+      '@types/react': 18.0.24
+      csstype: 3.1.1
+    dev: true
+
   /@types/react/18.0.24:
     resolution: {integrity: sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.1
-    dev: true
 
   /@types/react/18.0.26:
     resolution: {integrity: sha512-hCR3PJQsAIXyxhTNSiDFY//LhnMZWpNNr5etoCqx/iUfGc5gXWtQR2Phl908jVR6uPXacojQWTg4qRpkxTuGug==}
@@ -1605,6 +1615,7 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.1
+    dev: true
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
@@ -4166,12 +4177,20 @@ packages:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
+  /lodash.debounce/4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: false
+
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
   /lodash.sortby/4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
+    dev: false
+
+  /lodash.throttle/4.1.1:
+    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
     dev: false
 
   /lodash.truncate/4.4.2:
@@ -5106,6 +5125,18 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-lazy-load-image-component/1.5.6_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-M0jeJtOlTHgThOfgYM9krSqYbR6ShxROy/KVankwbw9/amPKG1t5GSGN1sei6Cyu8+QJVuyAUvQ+LFtCVTTlKw==}
+    peerDependencies:
+      react: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+      react-dom: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+    dependencies:
+      lodash.debounce: 4.0.8
+      lodash.throttle: 4.1.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-lifecycles-compat/3.0.4:
@@ -6146,7 +6177,7 @@ packages:
       react: '>=15.0.0'
     dependencies:
       '@babel/runtime': 7.20.6
-      '@types/react': 18.0.26
+      '@types/react': 18.0.24
       invariant: 2.2.4
       react: 18.2.0
       react-lifecycles-compat: 3.0.4
