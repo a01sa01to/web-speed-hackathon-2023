@@ -68,16 +68,11 @@ export const Top: FC = () => {
                 const featureSection = _featureSection as FeatureSectionFragmentResponse;
                 return (
                   <div key={featureSection.id} className={styles.feature}>
+                    <h2 className={styles.featureHeading}>{featureSection.title}</h2>
                     {loading ? (
-                      <>
-                        <h2 className={styles.featureHeading}>Loading...</h2>
-                        <div style={{ height: '206px', width: '100%' }} />
-                      </>
+                      <div style={{ height: '206px', width: '100%' }} />
                     ) : (
-                      <>
-                        <h2 className={styles.featureHeading}>{featureSection.title}</h2>
-                        <ProductList featureSection={featureSection} />
-                      </>
+                      <ProductList featureSection={featureSection} />
                     )}
                   </div>
                 );
