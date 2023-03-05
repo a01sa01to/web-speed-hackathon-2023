@@ -1,0 +1,39 @@
+.offerLabel {
+  margin-bottom: 16px;
+}
+
+.container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.productName {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.productDescription {
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
+.priceWrapper {
+  align-items: flex-start;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.priceWithoutOffer {
+  align-self: flex-end;
+  margin-bottom: 4px;
+  text-decoration: line-through;
+}
+
+.price {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  font-weight: 700;
+}

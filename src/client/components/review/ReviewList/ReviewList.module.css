@@ -1,0 +1,33 @@
+.itemList {
+  display: grid;
+  gap: 16px;
+}
+
+.item {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.avaterImage {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.content {
+  display: grid;
+  flex: 1;
+}
+
+.time {
+  color: #999999;
+  font-size: 0.75rem;
+}
+
+.comment {
+  color: #222222;
+  font-size: 0.875rem;
+  line-height: 20px;
+  min-height: 20px;
+}

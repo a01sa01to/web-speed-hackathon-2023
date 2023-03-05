@@ -1,0 +1,21 @@
+.form {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.commentTextAreaWrapper {
+  display: grid;
+  gap: 4px;
+}
+
+.submitButton {
+  justify-self: center;
+}
+
+.error {
+  color: #b00020;
+  font-size: 0.875rem;
+  line-height: 1;
+  min-height: 1em;
+}

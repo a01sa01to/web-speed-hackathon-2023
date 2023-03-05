@@ -1,0 +1,41 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  font-size: 24px;
+}
+
+.switchToSignInButton {
+  color: #3ba175;
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+}
+
+.inputList {
+  display: grid;
+  gap: 16px;
+}
+
+.submitButton {
+  justify-self: center;
+}
+
+.error {
+  color: #b00020;
+  font-size: 0.875rem;
+  line-height: 1;
+  min-height: 1em;
+}

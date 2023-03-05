@@ -1,0 +1,5 @@
+.container {
+  height: var(--clientHeight);
+  position: relative;
+  width: 100%;
+}

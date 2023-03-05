@@ -9,7 +9,7 @@ import { Modal } from '../../foundation/Modal';
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
 
-import * as styles from './SignUpModal.styles';
+import styles from './SignUpModal.module.css';
 
 const NOT_INCLUDED_AT_CHAR_REGEX = /^(?:[^@]*){6,}$/;
 const NOT_INCLUDED_SYMBOL_CHARS_REGEX = /^(?:(?:[a-zA-Z0-9]*){2,})+$/;
@@ -67,19 +67,19 @@ export const SignUpModal: FC = () => {
 
   return (
     <Modal onHide={handleCloseModal} show={isOpened}>
-      <div className={styles.inner()}>
-        <header className={styles.header()}>
-          <h2 className={styles.heading()}>会員登録</h2>
+      <div className={styles.inner}>
+        <header className={styles.header}>
+          <h2 className={styles.heading}>会員登録</h2>
           <button
-            className={styles.switchToSignInButton()}
+            className={styles.switchToSignInButton}
             data-testid="modal-switch-to-signin"
             onClick={handleOpenModal}
           >
             ログイン
           </button>
         </header>
-        <form className={styles.form()} onSubmit={formik.handleSubmit}>
-          <div className={styles.inputList()}>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+          <div className={styles.inputList}>
             <TextInput
               required
               id="email"
@@ -89,7 +89,7 @@ export const SignUpModal: FC = () => {
               type="email"
               value={formik.values.email}
             />
-            <p className={styles.error()}>{formik.errors.email}</p>
+            <p className={styles.error}>{formik.errors.email}</p>
 
             <TextInput
               required
@@ -100,7 +100,7 @@ export const SignUpModal: FC = () => {
               type="text"
               value={formik.values.name}
             />
-            <p className={styles.error()}>{formik.errors.name}</p>
+            <p className={styles.error}>{formik.errors.name}</p>
 
             <TextInput
               required
@@ -111,14 +111,14 @@ export const SignUpModal: FC = () => {
               type="password"
               value={formik.values.password}
             />
-            <p className={styles.error()}>{formik.errors.password}</p>
+            <p className={styles.error}>{formik.errors.password}</p>
           </div>
-          <div className={styles.submitButton()}>
+          <div className={styles.submitButton}>
             <PrimaryButton size="base" type="submit">
               登録する
             </PrimaryButton>
           </div>
-          {submitError ? <p className={styles.error()}>会員登録に失敗しました</p> : null}
+          {submitError ? <p className={styles.error}>会員登録に失敗しました</p> : null}
         </form>
       </div>
     </Modal>

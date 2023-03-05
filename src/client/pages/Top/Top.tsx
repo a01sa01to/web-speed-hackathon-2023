@@ -6,11 +6,10 @@ import { Layout } from '../../components/application/Layout';
 import { ProductList } from '../../components/feature/ProductList';
 import { ProductHeroImage } from '../../components/product/ProductHeroImage';
 import type { FeatureSectionFragmentResponse } from '../../graphql/fragments';
-import { FeatureItemFragmentResponse } from '../../graphql/fragments';
 import { useFeatures } from '../../hooks/useFeatures';
 import { useRecommendation } from '../../hooks/useRecommendation';
 
-import * as styles from './Top.styles';
+import styles from './Top.module.css';
 
 export const Top: FC = () => {
   const { loading: loadingRecommendation, recommendation } = useRecommendation();
@@ -60,7 +59,7 @@ export const Top: FC = () => {
             recommendation && <ProductHeroImage product={recommendation.product} title="今週のオススメ" />
           )}
 
-          <div className={styles.featureList()}>
+          <div className={styles.featureList}>
             {!features ? (
               <div>Loading...</div>
             ) : (
@@ -68,15 +67,15 @@ export const Top: FC = () => {
                 const loading = _loading as boolean;
                 const featureSection = _featureSection as FeatureSectionFragmentResponse;
                 return (
-                  <div key={featureSection.id} className={styles.feature()}>
+                  <div key={featureSection.id} className={styles.feature}>
                     {loading ? (
                       <>
-                        <h2 className={styles.featureHeading()}>Loading...</h2>
+                        <h2 className={styles.featureHeading}>Loading...</h2>
                         <div style={{ height: '206px', width: '100%' }} />
                       </>
                     ) : (
                       <>
-                        <h2 className={styles.featureHeading()}>{featureSection.title}</h2>
+                        <h2 className={styles.featureHeading}>{featureSection.title}</h2>
                         <ProductList featureSection={featureSection} />
                       </>
                     )}

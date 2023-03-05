@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+
+.video {
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.video__mobile {
+  max-width: 100vw;
+}
+
+.video__desktop {
+  max-width: 1024px;
+}

@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+}
+
+.container__mobile {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.container__desktop {
+  flex-direction: row;
+  gap: 8px;
+}
+
+.item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  opacity: 1;
+  transition-duration: 300ms;
+  transition-property: opacity;
+  transition-timing-function: linear;
+}
+.item:hover {
+  opacity: 0.8;
+}
+
+.itemInner {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.thumbnail {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.thumbnail__mobile {
+  width: 50%;
+}
+
+.thumbnail__desktop {
+  width: 256px;
+}
+
+.offerLabel {
+  left: 0;
+  margin: 4px;
+  position: absolute;
+  top: 0;
+}
+
+.details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 8px 4px;
+}
+
+.itemName {
+  -webkit-box-orient: vertical;
+  color: #222222;
+  display: -webkit-box;
+  -webkit-line-clamp: line;
+  overflow: hidden;
+}
+
+.itemPrice {
+  color: #222222;
+  font-size: 0.875rem;
+}
+
+.controller {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  padding: 4px 8px;
+}
+
+.controller__desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: flex-start;
+}
+
+.controller__mobile {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.counter {
+  align-items: center;
+  display: flex;
+  font-size: 0.75rem;
+}
+
+.counterInput {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  margin-left: 4px;
+  padding: 4px 8px;
+  width: 64px;
+}
+.counterInput::placeholder {
+  color: #999999;
+}

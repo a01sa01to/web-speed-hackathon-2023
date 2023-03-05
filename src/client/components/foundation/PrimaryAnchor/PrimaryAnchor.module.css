@@ -1,0 +1,19 @@
+.inner {
+  align-items: center;
+  background-color: #3ba175;
+  border-radius: 8px;
+  color: #ffffff;
+  display: inline-grid;
+  justify-content: center;
+  padding: 8px 24px;
+}
+
+.container__base {
+  height: auto;
+  width: auto;
+}
+
+.container__lg {
+  height: 60px;
+  width: 200px;
+}

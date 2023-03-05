@@ -1,8 +1,5 @@
-import classNames from 'classnames';
 import type { FC } from 'react';
 import type { IconType } from 'react-icons';
-
-import * as styles from './Icon.styles';
 
 type Props = {
   IconType: IconType;
@@ -13,7 +10,7 @@ type Props = {
 
 export const Icon: FC<Props> = ({ color, height, IconType, width }) => {
   return (
-    <span className={classNames(styles.container({ color, height, width }))}>
+    <span style={{ color, height: `${height}px`, width: `${width}px` }}>
       <IconType />
     </span>
   );

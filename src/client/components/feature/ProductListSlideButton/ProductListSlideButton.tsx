@@ -4,7 +4,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 import { Icon } from '../../foundation/Icon';
 
-import * as styles from './ProductListSlideButton.styles';
+import styles from './ProductListSlideButton.module.css';
 
 export const ArrowType = {
   LEFT: 'LEFT',
@@ -21,8 +21,8 @@ type Props = {
 export const ProductListSlideButton: FC<Props> = ({ arrowType, disabled, onClick }) => {
   return (
     <button
-      className={classNames(styles.container(), {
-        [styles.container__disabled()]: disabled,
+      className={classNames(styles.container, {
+        [styles.container__disabled]: disabled,
       })}
       disabled={disabled}
       onClick={onClick}

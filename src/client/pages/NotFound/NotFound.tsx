@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { Layout } from '../../components/application/Layout';
 
-import * as styles from './NotFound.styles';
+import styles from './NotFound.module.css';
 
 export const NotFound: FC = () => {
   return (
@@ -26,10 +26,10 @@ export const NotFound: FC = () => {
         <title>ページが見つかりませんでした</title>
       </Helmet>
       <Layout>
-        <div className={styles.container()}>
-          <div className={styles.inner()}>
-            <p className={styles.mainParagraph()}>ページが存在しません</p>
-            <p className={styles.subParagraph()}>Not Found</p>
+        <div className={styles.container}>
+          <div className={styles.inner}>
+            <p className={styles.mainParagraph}>ページが存在しません</p>
+            <p className={styles.subParagraph}>Not Found</p>
           </div>
         </div>
       </Layout>

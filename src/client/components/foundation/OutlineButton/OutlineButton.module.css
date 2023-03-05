@@ -1,0 +1,16 @@
+.container {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  color: #222222;
+}
+
+.container__base {
+  font-size: 0.75rem;
+  padding: 4px 16px;
+}
+
+.container__lg {
+  font-size: 1rem;
+  padding: 8px 24px;
+}

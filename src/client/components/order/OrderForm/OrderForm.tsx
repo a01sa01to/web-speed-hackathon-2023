@@ -4,7 +4,7 @@ import type { ChangeEventHandler, FC } from 'react';
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
 
-import * as styles from './OrderForm.styles';
+import styles from './OrderForm.module.css';
 
 type OrderFormValue = {
   zipCode: string;
@@ -50,9 +50,9 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <div className={styles.container()}>
-      <form className={styles.form()} data-testid="order-form" onSubmit={formik.handleSubmit}>
-        <div className={styles.inputList()}>
+    <div className={styles.container}>
+      <form className={styles.form} data-testid="order-form" onSubmit={formik.handleSubmit}>
+        <div className={styles.inputList}>
           <TextInput
             required
             id="zipCode"
@@ -86,7 +86,7 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
             value={formik.values.streetAddress}
           />
         </div>
-        <div className={styles.purchaseButton()}>
+        <div className={styles.purchaseButton}>
           <PrimaryButton size="lg" type="submit">
             購入
           </PrimaryButton>

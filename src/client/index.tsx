@@ -4,10 +4,8 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import { App } from './components/application/App';
-import { injectGlobalStyle } from './global.styles';
+import './global.css';
 import 'modern-css-reset/src/reset.css';
-
-injectGlobalStyle();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>

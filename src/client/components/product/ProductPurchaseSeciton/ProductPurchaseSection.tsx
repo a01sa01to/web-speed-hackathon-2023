@@ -9,7 +9,7 @@ import { OutlineButton } from '../../foundation/OutlineButton';
 import { PrimaryAnchor } from '../../foundation/PrimaryAnchor';
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 
-import * as styles from './ProductPurchaseSection.styles';
+import styles from './ProductPurchaseSection.module.css';
 
 type Props = {
   product: ProductFragmentResponse | undefined;
@@ -27,9 +27,9 @@ export const ProductPurchaseSection: FC<Props> = memo(
 
     if (!isAuthUser) {
       return (
-        <div className={styles.container()}>
-          <div className={styles.signInWrapper()}>
-            <span className={styles.signIn()}>購入にはログインが必要です</span>
+        <div className={styles.container}>
+          <div className={styles.signInWrapper}>
+            <span className={styles.signIn}>購入にはログインが必要です</span>
             <PrimaryButton onClick={() => onOpenSignInModal()} size="sm">
               ログイン
             </PrimaryButton>
@@ -40,7 +40,7 @@ export const ProductPurchaseSection: FC<Props> = memo(
 
     if (amountInCart === 0) {
       return (
-        <div className={styles.container()}>
+        <div className={styles.container}>
           <PrimaryButton onClick={() => onUpdateCartItem(product.id, 1)} size="sm">
             カートに追加
           </PrimaryButton>
@@ -49,14 +49,14 @@ export const ProductPurchaseSection: FC<Props> = memo(
     }
 
     return (
-      <div className={styles.container()}>
-        <p className={styles.amount()}>
-          <span className={styles.checkIcon()}>
+      <div className={styles.container}>
+        <p className={styles.amount}>
+          <span className={styles.checkIcon}>
             <Icon IconType={FaCheckCircle} color="#3BA175" height={18} width={18} />
           </span>
           <span>{amountInCart}個 カートに追加済み</span>
         </p>
-        <div className={styles.actionButtonList()}>
+        <div className={styles.actionButtonList}>
           <PrimaryAnchor href="/order" size="base">
             購入手続きへ
           </PrimaryAnchor>

@@ -1,0 +1,51 @@
+.container {
+  display: grid;
+  gap: 8px;
+  padding: 24px 16px;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.noticeHeading {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.noticeDescriptionWrapper {
+  display: grid;
+  height: 100%;
+  place-items: center;
+}
+
+.noticeDescription {
+  font-family: 'Noto Serif JP', sans-serif;
+  text-align: center;
+}
+
+.noticeDescription__desktop {
+  font-size: 1.125rem;
+}
+
+.noticeDescription__mobile {
+  font-size: 1rem;
+}
+
+.recommended {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.recommendedHeading {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.backToTopButtonWrapper {
+  margin-top: 40px;
+  text-align: center;
+}

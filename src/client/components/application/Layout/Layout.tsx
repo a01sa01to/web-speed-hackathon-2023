@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react';
 import { Footer } from '../../navigators/Footer/Footer';
 import { Header } from '../../navigators/Header/Header';
 
-import * as styles from './Layout.styles';
+import styles from './Layout.module.css';
 
 type Props = {
   children: ReactNode;
@@ -12,7 +12,7 @@ type Props = {
 export const Layout: FC<Props> = ({ children }) => (
   <>
     <Header />
-    <main className={styles.container()}>{children}</main>
+    <main className={styles.container}>{children}</main>
     <Footer />
   </>
 );

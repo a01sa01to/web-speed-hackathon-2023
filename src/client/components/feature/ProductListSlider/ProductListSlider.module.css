@@ -1,0 +1,41 @@
+.container {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.slideButton {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.listWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.list {
+  align-items: center;
+  display: grid;
+  grid-auto-columns: calc(100% / var(--visibleitemcount));
+  grid-auto-flow: column;
+  justify-content: flex-start;
+  transform: translateX(calc(var(--slideindex) / var(--visibleitemcount) * -100%));
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+  width: 100%;
+}
+
+.item {
+  align-items: flex-start;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0px 8px;
+}
+
+.item__hidden {
+  opacity: 0.5;
+  pointer-events: none;
+}

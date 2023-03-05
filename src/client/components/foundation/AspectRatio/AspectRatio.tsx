@@ -2,7 +2,7 @@ import type { FC, ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { throttle } from 'throttle-debounce';
 
-import * as styles from './AspectRatio.styles';
+import styles from './AspectRatio.module.css';
 
 type Props = {
   ratioWidth: number;
@@ -34,7 +34,7 @@ export const AspectRatio: FC<Props> = ({ children, ratioHeight, ratioWidth }) =>
   }, [ratioHeight, ratioWidth]);
 
   return (
-    <div ref={containerRef} className={styles.container({ clientHeight })}>
+    <div ref={containerRef} className={styles.container} style={{ '--clientHeight': `${clientHeight ?? 0}px` } as any}>
       {children}
     </div>
   );

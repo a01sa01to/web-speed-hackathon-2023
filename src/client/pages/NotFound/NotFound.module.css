@@ -1,0 +1,24 @@
+.container {
+  display: grid;
+  height: 50vh;
+  place-items: center;
+}
+
+.inner {
+  display: grid;
+  gap: 16px;
+  place-items: center;
+}
+
+.mainParagraph {
+  color: #222222;
+  font-family: 'Noto Serif JP', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.subParagraph {
+  color: #222222;
+  font-family: 'Noto Serif JP', sans-serif;
+  font-size: 0.875rem;
+}

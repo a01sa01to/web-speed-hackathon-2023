@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itemList {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+
+.totalPrice {
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 8px 0;
+  text-align: right;
+  width: 100%;
+}

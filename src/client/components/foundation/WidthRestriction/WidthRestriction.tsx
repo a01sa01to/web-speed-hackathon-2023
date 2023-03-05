@@ -2,7 +2,7 @@ import type { FC, ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { throttle } from 'throttle-debounce';
 
-import * as styles from './WidthRestriction.styles';
+import styles from './WidthRestriction.module.css';
 
 type Props = {
   children: ReactNode;
@@ -34,8 +34,10 @@ export const WidthRestriction: FC<Props> = ({ children }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className={styles.container()}>
-      <div className={styles.inner({ width: clientWidth })}>{isReady ? children : null}</div>
+    <div ref={containerRef} className={styles.container}>
+      <div className={styles.inner} style={{ '--width': `${clientWidth}px` } as any}>
+        {isReady ? children : null}
+      </div>
     </div>
   );
 };

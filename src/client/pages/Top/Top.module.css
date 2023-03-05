@@ -1,0 +1,18 @@
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.featureHeading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0 16px;
+}

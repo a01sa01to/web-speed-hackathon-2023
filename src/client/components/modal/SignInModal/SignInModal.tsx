@@ -9,7 +9,7 @@ import { Modal } from '../../foundation/Modal';
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
 
-import * as styles from './SignInModal.styles';
+import styles from './SignInModal.module.css';
 
 const NOT_INCLUDED_AT_CHAR_REGEX = /^(?:[^@]*){6,}$/;
 const NOT_INCLUDED_SYMBOL_CHARS_REGEX = /^(?:(?:[a-zA-Z0-9]*){2,})+$/;
@@ -64,19 +64,19 @@ export const SignInModal: FC = () => {
 
   return (
     <Modal onHide={handleCloseModal} show={isOpened}>
-      <div className={styles.inner()}>
-        <header className={styles.header()}>
-          <h2 className={styles.heading()}>ログイン</h2>
+      <div className={styles.inner}>
+        <header className={styles.header}>
+          <h2 className={styles.heading}>ログイン</h2>
           <button
-            className={styles.switchToSignUpButton()}
+            className={styles.switchToSignUpButton}
             data-testid="modal-switch-to-signup"
             onClick={handleOpenModal}
           >
             会員登録
           </button>
         </header>
-        <form className={styles.form()} onSubmit={formik.handleSubmit}>
-          <div className={styles.inputList()}>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+          <div className={styles.inputList}>
             <TextInput
               required
               id="email"
@@ -86,7 +86,7 @@ export const SignInModal: FC = () => {
               type="email"
               value={formik.values.email}
             />
-            <p className={styles.error()}>{formik.errors.email}</p>
+            <p className={styles.error}>{formik.errors.email}</p>
 
             <TextInput
               required
@@ -97,14 +97,14 @@ export const SignInModal: FC = () => {
               type="password"
               value={formik.values.password}
             />
-            <p className={styles.error()}>{formik.errors.password}</p>
+            <p className={styles.error}>{formik.errors.password}</p>
           </div>
-          <div className={styles.submitButton()}>
+          <div className={styles.submitButton}>
             <PrimaryButton size="base" type="submit">
               ログイン
             </PrimaryButton>
           </div>
-          {submitError != null ? <p className={styles.error()}>ログインに失敗しました</p> : null}
+          {submitError != null ? <p className={styles.error}>ログインに失敗しました</p> : null}
         </form>
       </div>
     </Modal>

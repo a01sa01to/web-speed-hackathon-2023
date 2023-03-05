@@ -1,0 +1,12 @@
+.cardList {
+  align-items: center;
+  display: flex;
+  overflow-x: scroll;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.cardListItem {
+  display: inline-block;
+  margin: 0 8px;
+}

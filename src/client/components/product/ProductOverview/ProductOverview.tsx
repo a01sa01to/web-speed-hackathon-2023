@@ -6,7 +6,7 @@ import type { LimitedTimeOfferFragmentResponse, ProductFragmentResponse } from '
 import isEqual from '../../../utils/is_equal';
 import { ProductOfferLabel } from '../ProductOfferLabel';
 
-import * as styles from './ProductOverview.styles';
+import styles from './ProductOverview.module.css';
 
 type Props = {
   product: ProductFragmentResponse | undefined;
@@ -33,7 +33,7 @@ export const ProductOverview: FC<Props> = memo(({ activeOffer, product }) => {
     });
 
     return (
-      <div className={styles.offerLabel()}>
+      <div className={styles.offerLabel}>
         <ProductOfferLabel size="lg">
           <time>{endTime}</time> までタイムセール
         </ProductOfferLabel>
@@ -42,18 +42,18 @@ export const ProductOverview: FC<Props> = memo(({ activeOffer, product }) => {
   };
 
   return (
-    <div className={styles.container()}>
+    <div className={styles.container}>
       {renderActiveOffer()}
-      <p className={styles.productName()}>{product.name}</p>
-      <p className={styles.productDescription()}>{product.description}</p>
+      <p className={styles.productName}>{product.name}</p>
+      <p className={styles.productDescription}>{product.description}</p>
 
-      <div className={styles.priceWrapper()}>
+      <div className={styles.priceWrapper}>
         {activeOffer !== undefined ? (
-          <span className={styles.priceWithoutOffer()}>
+          <span className={styles.priceWithoutOffer}>
             {currencyFormatter.format(product.price, { code: 'JPY', precision: 0 })}
           </span>
         ) : null}
-        <span className={styles.price()}>
+        <span className={styles.price}>
           {currencyFormatter.format(activeOffer?.price ?? product.price, { code: 'JPY', precision: 0 })}
         </span>
       </div>

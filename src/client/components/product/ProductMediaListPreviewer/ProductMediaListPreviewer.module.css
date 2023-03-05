@@ -1,0 +1,37 @@
+.container {
+  display: grid;
+  gap: 8px;
+  overflow-x: hidden;
+}
+
+.itemListWrapper {
+  display: grid;
+  overflow-x: scroll;
+  place-items: center;
+}
+
+.itemList {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 0 24px 8px;
+  width: fit-content;
+}
+
+.item {
+  height: 40px;
+  width: 40px;
+}
+
+.itemSelectButton {
+  display: inline-flex;
+  height: 100%;
+  opacity: 1;
+  pointer-events: auto;
+  width: 100%;
+}
+
+.itemSelectButton__disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

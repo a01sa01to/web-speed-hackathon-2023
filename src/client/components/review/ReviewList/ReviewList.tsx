@@ -4,7 +4,7 @@ import type { ReviewFragmentResponse } from '../../../graphql/fragments';
 import { AspectRatio } from '../../foundation/AspectRatio';
 import { Image } from '../../foundation/Image';
 
-import * as styles from './ReviewList.styles';
+import styles from './ReviewList.module.css';
 
 type Props = {
   reviews: ReviewFragmentResponse[];
@@ -16,7 +16,7 @@ export const ReviewList: FC<Props> = ({ reviews }) => {
   }
 
   return (
-    <ul className={styles.itemList()}>
+    <ul className={styles.itemList}>
       {reviews.map((review) => {
         const endTime = new Date(review.postedAt).toLocaleString('ja-jp', {
           day: '2-digit',
@@ -28,15 +28,15 @@ export const ReviewList: FC<Props> = ({ reviews }) => {
         });
 
         return (
-          <li key={review.id} className={styles.item()} data-testid="review-list-item">
-            <div className={styles.avaterImage()}>
+          <li key={review.id} className={styles.item} data-testid="review-list-item">
+            <div className={styles.avaterImage}>
               <AspectRatio ratioHeight={1} ratioWidth={1}>
                 <Image height={52} src={review.user.profile.avatar.filename.replace(/(png|jpg)/, 'webp')} width={52} />
               </AspectRatio>
             </div>
-            <div className={styles.content()}>
-              <time className={styles.time()}>{endTime}</time>
-              <p className={styles.comment()}>{review.comment}</p>
+            <div className={styles.content}>
+              <time className={styles.time}>{endTime}</time>
+              <p className={styles.comment}>{review.comment}</p>
             </div>
           </li>
         );

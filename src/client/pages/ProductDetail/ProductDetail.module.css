@@ -1,0 +1,29 @@
+.container {
+  display: grid;
+  gap: 40px;
+}
+
+.details {
+  display: grid;
+  gap: 20px;
+}
+
+.overview {
+  padding: 0 16px;
+}
+
+.purchase {
+  margin-left: auto;
+  padding: 0 16px;
+}
+
+.reviews {
+  display: grid;
+  gap: 20px;
+  padding: 0 16px;
+}
+
+.reviewsHeading {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
