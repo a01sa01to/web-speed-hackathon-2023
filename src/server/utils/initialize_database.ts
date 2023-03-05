@@ -27,6 +27,8 @@ export const initializeDatabase = async () => {
     'CREATE INDEX shopping_cart_item_order_idx ON shopping_cart_item (orderId)',
     // create index on user.id
     'CREATE INDEX user_idx ON user (id)',
+    // create index on user.email
+    'CREATE INDEX user_email_idx ON user (email)',
   ];
   await Promise.all(
     Queries.map(
