@@ -4,7 +4,6 @@ import { memo } from 'react';
 
 import type { OrderFragmentResponse } from '../../../graphql/fragments';
 import { useTotalPrice } from '../../../hooks/useTotalPrice';
-import isEqual from '../../../utils/is_equal';
 import { CartItem } from '../CartItem';
 
 import styles from './OrderPreview.module.css';
@@ -32,6 +31,6 @@ export const OrderPreview: FC<Props> = memo(({ onRemoveCartItem, onUpdateCartIte
       <p className={styles.totalPrice}>{currencyFormatter.format(totalPrice, { code: 'JPY', precision: 0 })}</p>
     </div>
   );
-}, isEqual);
+});
 
 OrderPreview.displayName = 'OrderPreview';

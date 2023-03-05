@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import { memo } from 'react';
 
 import type { LimitedTimeOfferFragmentResponse, ProductFragmentResponse } from '../../../graphql/fragments';
-import isEqual from '../../../utils/is_equal';
 import { ProductOfferLabel } from '../ProductOfferLabel';
 
 import styles from './ProductOverview.module.css';
@@ -59,6 +58,6 @@ export const ProductOverview: FC<Props> = memo(({ activeOffer, product }) => {
       </div>
     </div>
   );
-}, isEqual);
+});
 
 ProductOverview.displayName = 'ProductOverview';

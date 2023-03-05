@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { memo } from 'react';
 
 import type { FeatureSectionFragmentResponse } from '../../../graphql/fragments';
-import isEqual from '../../../utils/is_equal';
 import { DeviceType, GetDeviceType } from '../../foundation/GetDeviceType';
 import { ProductGridList } from '../ProductGridList';
 import { ProductListSlider } from '../ProductListSlider';
@@ -26,6 +25,6 @@ export const ProductList: FC<Props> = memo(({ featureSection }) => {
       }}
     </GetDeviceType>
   );
-}, isEqual);
+});
 
 ProductList.displayName = 'ProductList';

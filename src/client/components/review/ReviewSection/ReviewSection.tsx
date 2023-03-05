@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { memo, useState } from 'react';
 
 import type { ReviewFragmentResponse } from '../../../graphql/fragments';
-import isEqual from '../../../utils/is_equal';
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextArea } from '../../foundation/TextArea';
 import { ReviewList } from '../ReviewList';
@@ -66,6 +65,6 @@ export const ReviewSection: FC<Props> = memo(({ hasSignedIn, onSubmitReview, rev
       )}
     </div>
   );
-}, isEqual);
+});
 
 ReviewSection.displayName = 'ReviewSection';
