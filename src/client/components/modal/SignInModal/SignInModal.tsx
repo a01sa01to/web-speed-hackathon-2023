@@ -10,8 +10,8 @@ import { TextInput } from '../../foundation/TextInput';
 
 import styles from './SignInModal.module.css';
 
-const NOT_INCLUDED_AT_CHAR_REGEX = /^(?:[^@]*){6,}$/;
-const NOT_INCLUDED_SYMBOL_CHARS_REGEX = /^(?:(?:[a-zA-Z0-9]*){2,})+$/;
+const INCLUDED_AT_CHAR_REGEX = /@/;
+const INCLUDED_SYMBOL_CHARS_REGEX = /[^a-zA-Z0-9]/;
 
 export type SignInForm = {
   email: string;
@@ -48,10 +48,10 @@ export const SignInModal: FC = () => {
   const validate = (target: string, value: string) => {
     if (target === 'email') setErrors((prev) => ({ ...prev, email: '' }));
     if (target === 'password') setErrors((prev) => ({ ...prev, password: '' }));
-    if (target === 'email' && value != '' && NOT_INCLUDED_AT_CHAR_REGEX.test(value)) {
+    if (target === 'email' && value != '' && !INCLUDED_AT_CHAR_REGEX.test(value)) {
       setErrors((prev) => ({ ...prev, email: 'メールアドレスの形式が間違っています' }));
     }
-    if (target === 'password' && value != '' && NOT_INCLUDED_SYMBOL_CHARS_REGEX.test(value)) {
+    if (target === 'password' && value != '' && !INCLUDED_SYMBOL_CHARS_REGEX.test(value)) {
       setErrors((prev) => ({ ...prev, password: '英数字以外の文字を含めてください' }));
     }
   };

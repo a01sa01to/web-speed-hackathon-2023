@@ -8,8 +8,6 @@ import { ReviewList } from '../ReviewList';
 
 import styles from './ReviewSection.module.css';
 
-const LESS_THAN_64_LENGTH_REGEX = /^([\s\S\n]{0,8}){0,8}$/u;
-
 type Props = {
   reviews: ReviewFragmentResponse[] | undefined;
   hasSignedIn: boolean;
@@ -31,7 +29,7 @@ export const ReviewSection: FC<Props> = memo(({ hasSignedIn, onSubmitReview, rev
   };
   const validate = (target: string, value: string) => {
     if (target === 'comment') setError({ comment: '' });
-    if (target === 'comment' && value != '' && !LESS_THAN_64_LENGTH_REGEX.test(value)) {
+    if (target === 'comment' && value != '' && value.length > 64) {
       setError({ comment: '64 文字以内でコメントしてください' });
     }
   };
