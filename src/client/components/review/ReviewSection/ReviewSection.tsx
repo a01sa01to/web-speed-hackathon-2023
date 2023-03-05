@@ -1,7 +1,5 @@
-import type { FormikErrors } from 'formik';
-import { useFormik } from 'formik';
 import type { FC } from 'react';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 import type { ReviewFragmentResponse } from '../../../graphql/fragments';
 import isEqual from '../../../utils/is_equal';
@@ -24,40 +22,40 @@ type ReviewForm = {
 };
 
 export const ReviewSection: FC<Props> = memo(({ hasSignedIn, onSubmitReview, reviews }) => {
-  const formik = useFormik<ReviewForm>({
-    initialValues: {
-      comment: '',
-    },
-    async onSubmit(value, { resetForm }) {
-      onSubmitReview(value);
-      resetForm();
-    },
-    validate(values) {
-      const errors: FormikErrors<ReviewForm> = {};
-      if (values.comment != '' && !LESS_THAN_64_LENGTH_REGEX.test(values.comment)) {
-        errors['comment'] = '64 文字以内でコメントしてください';
-      }
-      return errors;
-    },
-    validateOnChange: true,
-  });
+  const [form, setForm] = useState<ReviewForm>({ comment: '' });
+  const [error, setError] = useState<ReviewForm>({ comment: '' });
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    onSubmitReview(form);
+    setForm({ comment: '' });
+  };
+  const validate = (target: string, value: string) => {
+    if (target === 'comment') setError({ comment: '' });
+    if (target === 'comment' && value != '' && !LESS_THAN_64_LENGTH_REGEX.test(value)) {
+      setError({ comment: '64 文字以内でコメントしてください' });
+    }
+  };
 
   return (
     <div>
       {reviews != null ? <ReviewList reviews={reviews} /> : null}
       {hasSignedIn && (
-        <form className={styles.form} data-testid="form-review" onSubmit={formik.handleSubmit}>
+        <form action="#" className={styles.form} data-testid="form-review" onSubmit={onSubmit}>
           <div className={styles.commentTextAreaWrapper}>
             <TextArea
               required
               id="comment"
               label="レビューを送信する"
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                validate('comment', e.target.value);
+                setForm({ comment: e.target.value });
+              }}
               placeholder="こちらの野菜はいかがでしたか？"
               rows={6}
-              value={formik.values.comment}
+              value={form.comment}
             />
-            <p className={styles.error}>{formik.errors.comment}</p>
+            <p className={styles.error}>{error.comment}</p>
           </div>
           <div className={styles.submitButton}>
             <PrimaryButton size="base" type="submit">

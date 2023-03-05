@@ -1,5 +1,3 @@
-import type { FormikErrors } from 'formik';
-import { useFormik } from 'formik';
 import type { FC } from 'react';
 import { useContext, useState } from 'react';
 
@@ -31,36 +29,32 @@ export const SignInModal: FC = () => {
   const handleCloseModal = () => ctx.setModalState(undefined);
 
   const [submitError, setSubmitError] = useState<Error | null>(null);
-  const formik = useFormik<SignInForm>({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    async onSubmit(values, { resetForm }) {
-      try {
-        await signIn({
-          email: values.email,
-          password: values.password,
-        }).then(() => reloadUser({ requestPolicy: 'network-only' }));
-        resetForm();
-        setSubmitError(null);
-        handleCloseModal();
-      } catch (err) {
-        setSubmitError(err as Error);
-      }
-    },
-    validate(values) {
-      const errors: FormikErrors<SignInForm> = {};
-      if (values.email != '' && NOT_INCLUDED_AT_CHAR_REGEX.test(values.email)) {
-        errors['email'] = 'メールアドレスの形式が間違っています';
-      }
-      if (values.password != '' && NOT_INCLUDED_SYMBOL_CHARS_REGEX.test(values.password)) {
-        errors['password'] = '英数字以外の文字を含めてください';
-      }
-      return errors;
-    },
-    validateOnChange: true,
-  });
+  const [form, setForm] = useState<SignInForm>({ email: '', password: '' });
+  const [errors, setErrors] = useState<SignInForm>({ email: '', password: '' });
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      await signIn({
+        email: form.email,
+        password: form.password,
+      }).then(() => reloadUser({ requestPolicy: 'network-only' }));
+      setForm({ email: '', password: '' });
+      setSubmitError(null);
+      handleCloseModal();
+    } catch (err) {
+      setSubmitError(err as Error);
+    }
+  };
+  const validate = (target: string, value: string) => {
+    if (target === 'email') setErrors((prev) => ({ ...prev, email: '' }));
+    if (target === 'password') setErrors((prev) => ({ ...prev, password: '' }));
+    if (target === 'email' && value != '' && NOT_INCLUDED_AT_CHAR_REGEX.test(value)) {
+      setErrors((prev) => ({ ...prev, email: 'メールアドレスの形式が間違っています' }));
+    }
+    if (target === 'password' && value != '' && NOT_INCLUDED_SYMBOL_CHARS_REGEX.test(value)) {
+      setErrors((prev) => ({ ...prev, password: '英数字以外の文字を含めてください' }));
+    }
+  };
 
   return (
     <Modal onHide={handleCloseModal} show={isOpened}>
@@ -75,29 +69,35 @@ export const SignInModal: FC = () => {
             会員登録
           </button>
         </header>
-        <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <form action="#" className={styles.form} onSubmit={onSubmit}>
           <div className={styles.inputList}>
             <TextInput
               required
               id="email"
               label="メールアドレス"
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                setForm((prev) => ({ ...prev, email: e.target.value }));
+                validate('email', e.target.value);
+              }}
               placeholder="メールアドレスを入力"
               type="email"
-              value={formik.values.email}
+              value={form.email}
             />
-            <p className={styles.error}>{formik.errors.email}</p>
+            <p className={styles.error}>{errors.email}</p>
 
             <TextInput
               required
               id="password"
               label="パスワード"
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                setForm((prev) => ({ ...prev, password: e.target.value }));
+                validate('password', e.target.value);
+              }}
               placeholder="パスワードを入力"
               type="password"
-              value={formik.values.password}
+              value={form.password}
             />
-            <p className={styles.error}>{formik.errors.password}</p>
+            <p className={styles.error}>{errors.password}</p>
           </div>
           <div className={styles.submitButton}>
             <PrimaryButton size="base" type="submit">
