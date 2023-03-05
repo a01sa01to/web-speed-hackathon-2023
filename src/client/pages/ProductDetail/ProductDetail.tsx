@@ -26,7 +26,7 @@ export const ProductDetail: FC = () => {
   const ctx = useContext(modalContext);
 
   const { product } = useProduct(Number(productId));
-  const { reviews } = useReviews(product?.id);
+  const { reloadReview, reviews } = useReviews(product?.id);
   const { isAuthUser, reloadQuery: reloadUser } = useAuthUser();
   const { sendReview } = useSendReview();
   const { updateCartItem } = useUpdateCartItem();
@@ -38,11 +38,13 @@ export const ProductDetail: FC = () => {
     sendReview({
       comment,
       productId: Number(productId),
-    }).then(() => reloadUser({ requestPolicy: 'network-only' }));
+    }).then(() => reloadReview({ requestPolicy: 'network-only' }));
   };
 
   const handleUpdateItem = (productId: number, amount: number) => {
-    updateCartItem({ amount: normalizeCartItemCount(amount), productId });
+    updateCartItem({ amount: normalizeCartItemCount(amount), productId }).then(() =>
+      reloadUser({ requestPolicy: 'network-only' }),
+    );
   };
 
   return (
