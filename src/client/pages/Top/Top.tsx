@@ -70,7 +70,7 @@ export const Top: FC = () => {
                   <div key={featureSection.id} className={styles.feature}>
                     <h2 className={styles.featureHeading}>{featureSection.title}</h2>
                     {loading ? (
-                      <div style={{ height: '206px', width: '100%' }} />
+                      <div style={{ backgroundColor: '#888', height: '206px', width: '100%' }} />
                     ) : (
                       <ProductList featureSection={featureSection} />
                     )}
