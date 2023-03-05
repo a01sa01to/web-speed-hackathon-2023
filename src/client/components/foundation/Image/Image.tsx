@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { ComponentProps } from 'react';
+import type { ComponentProps, FC } from 'react';
 import type { ScrollPosition } from 'react-lazy-load-image-component';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 
@@ -22,4 +22,4 @@ const img = ({ fill, scrollPosition, ...rest }: Props) => {
   );
 };
 
-export const Image = trackWindowScroll(img);
+export const Image = trackWindowScroll(img) as FC<Props>;
