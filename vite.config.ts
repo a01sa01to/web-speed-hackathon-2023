@@ -11,6 +11,12 @@ export default defineConfig(async ({ mode }) => {
       cssCodeSplit: true,
       minify: true,
       rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('urql') || id.includes('apollo') || id.includes('graphql')) return 'graphql';
+            return null;
+          },
+        },
         plugins: [
           mode === 'analyze'
             ? analyzer({
