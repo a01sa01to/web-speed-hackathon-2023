@@ -14,7 +14,7 @@ export const Routes: FC = () => {
   useScrollToTop();
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <Router.Routes>
         <Router.Route element={<Top />} path="/" />
         <Router.Route element={<ProductDetail />} path="/product/:productId" />

@@ -1,13 +1,16 @@
 import type { FC } from 'react';
+import { lazy, Suspense } from 'react';
 
 import { SignInModal } from '../../modal/SignInModal';
 import { SignUpModal } from '../../modal/SignUpModal';
 import { Providers } from '../Providers';
-import { Routes } from '../Routes';
+const Routes = lazy(() => import('../Routes'));
 
 export const App: FC = () => (
   <Providers>
-    <Routes />
+    <Suspense>
+      <Routes />
+    </Suspense>
     <SignInModal />
     <SignUpModal />
   </Providers>
