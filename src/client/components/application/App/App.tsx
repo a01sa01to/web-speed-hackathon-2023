@@ -1,17 +1,21 @@
 import type { FC } from 'react';
-import { lazy, Suspense } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { SignInModal } from '../../modal/SignInModal';
 import { SignUpModal } from '../../modal/SignUpModal';
+import { Footer } from '../../navigators/Footer/Footer';
+import { Header } from '../../navigators/Header/Header';
 import { Providers } from '../Providers';
-const Routes = lazy(() => import('../Routes'));
+import Routes from '../Routes';
 
 export const App: FC = () => (
   <Providers>
-    <Suspense>
+    <BrowserRouter>
+      <Header />
       <Routes />
-    </Suspense>
-    <SignInModal />
-    <SignUpModal />
+      <SignInModal />
+      <SignUpModal />
+      <Footer />
+    </BrowserRouter>
   </Providers>
 );
