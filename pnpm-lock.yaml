@@ -79,7 +79,6 @@ specifiers:
   vite: 4.1.4
   vite-plugin-ejs: 1.6.4
   vite-plugin-top-level-await: 1.2.4
-  zipcode-ja: 0.0.7
 
 dependencies:
   '@apollo/client': 3.7.9_gdcq4dv6opitr3wbfwyjmanyra
@@ -117,7 +116,6 @@ dependencies:
   throttle-debounce: 5.0.0
   typeorm: 0.3.11_h3l5zcb3i6sggvllyfknv6gs44
   urql: 3.0.3_onqnqwb3ubg5opvemcqf7c2qhy
-  zipcode-ja: 0.0.7
 
 devDependencies:
   '@babel/core': 7.20.5
@@ -6465,8 +6463,4 @@ packages:
 
   /zen-observable/0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
-    dev: false
-
-  /zipcode-ja/0.0.7:
-    resolution: {integrity: sha512-DJw7EUtu8aCwBrtlDwD/y2owHlkgNDmuC981eDz9EadDd/7/YofvFveImE+nFij0ftVQnZasyrAmW/HC6oIMcA==}
     dev: false
