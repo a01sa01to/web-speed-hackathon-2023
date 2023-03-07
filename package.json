@@ -2,10 +2,9 @@
   "private": true,
   "license": "MPL-2.0",
   "scripts": {
-    "start": "ts-node ./src/server/index.ts",
-    "dev": "npm-run-all -p dev:client dev:server",
-    "dev:client": "cross-env NODE_ENV=production vite build --watch",
-    "dev:server": "nodemon --watch src/server --ext \"ts,tsx\" --exec \"ts-node src/server\"",
+    "start": "npm-run-all -p start:client start:server",
+    "start:client": "cross-env NODE_ENV=production vite build --watch",
+    "start:server": "nodemon --watch src/server --ext \"ts,tsx\" --exec \"ts-node src/server\"",
     "build": "npm-run-all -s build:tsc build:vite",
     "build:tsc": "tsc",
     "build:vite": "cross-env NODE_ENV=production vite build",
