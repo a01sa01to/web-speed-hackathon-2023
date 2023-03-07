@@ -53,7 +53,8 @@
     "styled-components": "5.3.6",
     "throttle-debounce": "5.0.0",
     "typeorm": "0.3.11",
-    "urql": "3.0.3"
+    "urql": "3.0.3",
+    "zipcode-ja": "0.0.7"
   },
   "devDependencies": {
     "@babel/core": "7.20.5",

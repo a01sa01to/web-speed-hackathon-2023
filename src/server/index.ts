@@ -8,6 +8,7 @@ import route from 'koa-route';
 import send from 'koa-send';
 import session from 'koa-session';
 import serve from 'koa-static';
+import zipcodeJa from 'zipcode-ja';
 
 import type { Context } from './context';
 import { dataSource } from './data_source';
@@ -53,13 +54,8 @@ async function init(): Promise<void> {
     route.get('/api/zipcode', async (ctx) => {
       const zipcode = ctx.query.zipcode as string;
 
-      const result = await fetch(`https://zipcoda.net/api?zipcode=${zipcode}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-      if (result.length !== 1) ctx.body = JSON.stringify([]);
-      else ctx.body = JSON.stringify(result.items[0].components);
+      const result = zipcodeJa[zipcode] ?? { address: [] };
+      ctx.body = JSON.stringify(result.address);
       ctx.status = 200;
     }),
   );
