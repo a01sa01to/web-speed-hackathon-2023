@@ -1,0 +1,76 @@
+steps:
+  # Delete old versions
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    args:
+      [
+        '-c',
+        "gcloud app versions list --service=default | grep 0.00 | sort -rk 4,4 | awk '{print $2}' | tail -n +11 | xargs -l gcloud app versions delete {}",
+      ]
+  # Get cache
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'gs://wsh2023-379901.appspot.com/cache.tar.gz', '/workspace/cache.tar.gz']
+  # Extract cache
+  - name: gcr.io/cloud-builders/gsutil
+    entrypoint: /bin/bash
+    args: ['-c', 'tar -xzf cache.tar.gz']
+  # Install pnpm
+  - name: node:18
+    entrypoint: npm
+    args: ['install', '-g', 'pnpm']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Get pnpm store dir
+  - name: node:18
+    entrypoint: '/usr/local/bin/pnpm'
+    args: ['store', 'path']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Set pnpm store dir
+  - name: node:18
+    entrypoint: '/usr/local/bin/pnpm'
+    args: ['config', 'set', 'store-dir', '/workspace/.pnpm-store']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Install dependencies
+  - name: node:18
+    entrypoint: '/usr/local/bin/pnpm'
+    args: ['install']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Build
+  - name: node:18
+    entrypoint: '/usr/local/bin/pnpm'
+    args: ['build']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Cache
+  - name: gcr.io/cloud-builders/gsutil
+    entrypoint: /bin/bash
+    args: ['-c', 'tar -czf cache.tar.gz .pnpm-store']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Upload cache
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', '/workspace/cache.tar.gz', 'gs://wsh2023-379901.appspot.com/cache.tar.gz']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Clean
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    args: ['-c', 'rm -rf .pnpm-store']
+    volumes:
+      - name: 'local'
+        path: /usr/local
+  # Deploy
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    args: ['-c', 'gcloud app deploy']
+    timeout: 1200s
